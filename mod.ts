@@ -5,14 +5,16 @@ interface entry {
 }
 
 function execute(entries: entry[], predicate: string) {
+    const modified: entry[] = [];
     return entries.filter((v,i) => {
         const test = Function(`let Deno; let window; let Function; return (${predicate}).bind({})`)()(v);
         if(typeof test === 'boolean') return test;
         if(typeof test === 'object') {
             entries[i] = test;
+            modified.push(entries[i])
         }
         return undefined;
-    }).filter(v => v !== undefined);
+    }).filter(v => v !== undefined).concat(modified);
 }
 
 // Start listening on port 8080 of localhost.
