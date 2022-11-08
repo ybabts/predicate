@@ -7,7 +7,7 @@ interface entry {
 function execute(entries: entry[], predicate: string) {
     const modified: entry[] = [];
     return entries.filter((v,i) => {
-        const test = Function(`let Deno; let window; let Function; let fetch; return (${predicate}).bind({})`)()(v);
+        const test = Function(`let Deno; let window; let Function; let fetch; let console; return (${predicate}).bind({})`)()(v);
         if(typeof test === 'boolean') return test;
         if(typeof test === 'object') {
             entries[i] = test;
