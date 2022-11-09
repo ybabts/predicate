@@ -1,7 +1,8 @@
 export interface entry {
     id: number,
     name: string,
-    age: number
+    age: number,
+    fn: 
 }
 
 // deno-lint-ignore no-explicit-any
@@ -14,5 +15,3 @@ export async function get(predicate: predicate): Promise<entry[]> {
     });
     return JSON.parse(await (await result.blob()).text());
 }
-
-console.log('test')
