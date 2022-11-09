@@ -7,7 +7,11 @@ interface entry {
 function execute(entries: entry[], predicate: string) {
     const modified: entry[] = [];
     return entries.filter((v,i) => {
-        const test = Function(`let Deno; let window; let Function; let fetch; let console; return (${predicate}).bind({})`)()(v);
+        const test = Function(`let Deno; let window; let Function; let fetch; let eval; let globalThis; Object.freeze(Array.prototype); "use strict"; return (${predicate}).bind({})`)()(v, {
+            getURL() {
+                return 'test123';
+            }
+        });
         if(typeof test === 'boolean') return test;
         if(typeof test === 'object') {
             entries[i] = test;
@@ -16,6 +20,26 @@ function execute(entries: entry[], predicate: string) {
         return undefined;
     }).filter(v => v !== undefined).concat(modified);
 }
+
+setInterval(() => {
+    const map = new Map;
+    for(const obj of entries) {
+        for(const [key, value] of Object.entries(obj)) {
+            map.set(key, typeof value);
+        }
+    }
+    Deno.writeFileSync('schema.ts', new TextEncoder().encode(`export interface schema {${Array.from(map.entries()).map(v => `\n    ${v[0]}: ${v[1]}`)}\n}
+// deno-lint-ignore no-explicit-any
+export type predicate = (e: schema) => boolean | any;
+
+export async function get(predicate: predicate): Promise<schema[]> {
+    const result = await fetch('http://localhost/', {
+        method: 'POST',
+        body: predicate.toString()
+    });
+    return JSON.parse(await (await result.blob()).text());
+}`))
+}, 500)
 
 // Start listening on port 8080 of localhost.
 const server = Deno.listen({ port: 80 });
@@ -89,7 +113,7 @@ async function serveHttp(conn: Deno.Conn) {
         }
     }
     if(requestEvent.request.method === 'GET') {
-        const types = await Deno.open('./types.ts');
+        const types = await Deno.open('./schema.ts');
         requestEvent.respondWith(new Response(types.readable, {
             status: 200,
             headers: {
