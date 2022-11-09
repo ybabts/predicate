@@ -1,23 +1,17 @@
 import { Head } from "$fresh/runtime.ts";
-import Counter from "../islands/Counter.tsx";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Fresh App</title>
+        <title>Predicate</title>
+        <link href='./css/unisans.css' rel='stylesheet'></link>
+        <link href='./css/index.css' rel='stylesheet'></link>
       </Head>
-      <div class="p-4 mx-auto max-w-screen-md">
-        <img
-          src="/logo.svg"
-          class="w-32 h-32"
-          alt="the fresh logo: a sliced lemon dripping with juice"
-        />
-        <p class="my-6">
-          Welcome to `fresh`. Try updating this message in the ./routes/index.tsx
-          file, and refresh.
-        </p>
-        <Counter start={3} />
+      <div class='w-full h-screen bg-black flex align-middle justify-center text-white flex-col text-center text-8xl relative overflow-hidden'>
+        <div class='anime-grid-spin w-[200%] h-[200%] z-0'></div>
+        <div class='anime-grid-spin2 w-[200%] h-[200%] z-0'></div>
+        <h1 class='font-unisans-heavy tracking-wide z-10 drop-shadow-2xl align-middle justify-center h-48'>Predicate</h1>
       </div>
     </>
   );
