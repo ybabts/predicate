@@ -1,8 +1,7 @@
 export interface entry {
     id: number,
     name: string,
-    age: number,
-    fn: 
+    age: number
 }
 
 // deno-lint-ignore no-explicit-any

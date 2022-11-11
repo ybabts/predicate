@@ -30,7 +30,7 @@ setInterval(() => {
     }
     Deno.writeFileSync('schema.ts', new TextEncoder().encode(`export interface schema {${Array.from(map.entries()).map(v => `\n    ${v[0]}: ${v[1]}`)}\n}
 // deno-lint-ignore no-explicit-any
-export type predicate = (e: schema) => boolean | any;
+export type predicate = (e: schema, m: { getURL: () => string }) => boolean | any;
 
 export async function get(predicate: predicate): Promise<schema[]> {
     const result = await fetch('http://localhost/', {

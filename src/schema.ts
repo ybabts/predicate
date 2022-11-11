@@ -2,10 +2,11 @@ export interface schema {
     id: number,
     name: string,
     age: number,
-    msg: string
+    canDrink: boolean,
+    message: string
 }
 // deno-lint-ignore no-explicit-any
-export type predicate = (e: schema, m: { getURL: () => string }) => boolean | any;
+export type predicate = (e: schema) => boolean | any;
 
 export async function get(predicate: predicate): Promise<schema[]> {
     const result = await fetch('http://localhost/', {
