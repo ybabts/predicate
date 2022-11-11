@@ -1,43 +1,8 @@
-.anime-grid-spin {
-    position: absolute;
-    background-image: radial-gradient(#FFF 1%, transparent 10%, transparent 100%);
-    background-size: 0.5em 0.5em;
-    animation: 30s infinite linear anime-grid-spin;
-    left: -50%;
-}
-
-@keyframes anime-grid-spin {
-    from {
-        transform: rotate(0deg);
-        opacity: 100%;
-    }
-    50% {
-        opacity: 40%;
-    }
+@keyframes spin {
     to {
         transform: rotate(360deg);
-        opacity: 10%;
     }
 }
-
-.anime-grid-spin2 {
-    position: absolute;
-    background-image: radial-gradient(#FFF 1%, transparent 10%, transparent 100%);
-    background-size: 0.5em 0.5em;
-    animation: 30s infinite linear anime-grid-spin2;
-    left: -50%;
-}
-
-@keyframes anime-grid-spin2 {
-    from {
-        transform: rotate(360deg);
-        opacity: 10%;
-    }
-    50% {
-        opacity: 40%;
-    }
-    to {
-        transform: rotate(0deg);
-        opacity: 100%;
-    }
+.animate-spin-slow {
+    animation: spin 60s linear infinite;
 }
