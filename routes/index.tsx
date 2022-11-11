@@ -11,7 +11,7 @@ export default function Home() {
 		<link href='./css/unisans.css' rel='stylesheet'></link>
 		<link href='./css/index.css' rel='stylesheet'></link>
 	</Head>
-	<body class='font-signika-negative h-[10000px] bg-black'>
+	<body class='font-signika-negative h-[10000px] bg-black text-white'>
 		<Navigator/>
 		<div class='w-full bg-black sm:min-h-[600px] m:min-h-[700px] lg:min-h-[800px] xl:min-h-[1000px] flex flex-col justify-center overflow-hidden relative'>
 			<img src='./img/lilzidesigns-rTzIzsbBHi8-unsplash.jpg' class='absolute scale-[-1] animate-rainbow-fadein w-full' style='filter: contrast(1.5)'/>
@@ -24,8 +24,21 @@ export default function Home() {
 				<Taglines />
 			</div>
 		</div>
-		<div class='bg-black'>
-			<div class='w-full h-[600px] translate-y-[-600px]' style='background: linear-gradient(to bottom, transparent, #000)'/>
+		<div class='w-full'>
+			<div class='w-full h-[600px] translate-y-[-600px] absolute' style='background: linear-gradient(to bottom, transparent, #000)'/>
+			<div class='w-[80%] m-auto translate-y-[-50px] justify-center flex flex-row align-middle animate-rainbow'>
+				<img src='./img/function-symbol.png' class='inline-block w-[200px] mr-32 rainbow-rave'/>
+				<div class='w-[50%] align-middle flex flex-col justify-center'>
+					<h1 class='text-[1.75em] font-unisans-heavy tracking-wider inline-block'>What the fuck is Predicate?</h1>
+					<p class='mb-2'>
+						Predicate is a new way to do APIs that doesn't require an abstraction. If you know how to write Typescript (or Javascript),
+						you know how to write a query in Predicate!
+					</p>
+					<button class='p-3 bg-white inline-block w-32 mt-3 bg-transparent border-white border-solid border-2 rounded-md cool-hover'>
+						Try it out
+					</button>
+				</div>
+			</div>
 		</div>
 	</body>
 	</>

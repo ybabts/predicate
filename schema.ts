@@ -1,7 +1,9 @@
 export interface schema {
     id: number,
     name: string,
-    age: number
+    age: number,
+    canDrink: boolean,
+    message: string
 }
 // deno-lint-ignore no-explicit-any
 export type predicate = (e: schema) => boolean | any;
