@@ -6,3 +6,33 @@
 .animate-spin-slow {
     animation: spin 60s linear infinite;
 }
+
+@keyframes rainbow {
+    from {
+        filter: hue-rotate(0deg)
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.animate-rainbow {
+    animation: rainbow 1s linear infinite;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0%;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+.animate-fadein {
+    animation: 5s ease-out 0s 1 fadein;
+}
+
+.animate-rainbow-fadein {
+    animation: 5s ease-out 0s 1 fadein, rainbow 15s linear infinite;
+}
