@@ -18,7 +18,6 @@ onmessage = msg => {
             result
         });
     } catch(e) {
-        console.log(e)
         postMessage({
             error: Deno.inspect(e).split('\n')
         })

@@ -1,5 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
 import { resolve } from "https://deno.land/std@0.150.0/path/win32.ts";
+import PredicateFunctions from 'src/predicateFunctions.ts';
 
 interface entry {
   id: number,
@@ -76,22 +77,20 @@ export const handler: Handlers = {
                 }))
             }
             worker.onmessage = msg => {
-              resolve(new Response(JSON.stringify({
+              if(!msg.data.action) return resolve(new Response(JSON.stringify({
                 result: msg.data
               }), {
                   status: 200,
                   headers: {
                     "Content-Type": "application/json"
                   }
-              }))
+              }));
+              if(msg.data.action.name === 'write') ENTRIES[msg.data.action.target] = msg.data.action.value;
             }
             worker.postMessage({
               body,
               data: ENTRIES,
-              methods: {
-                testing: (() => 'Hello World!').toString(),
-                name: ((name: string) => `My name is ${name}.`).toString()
-              }
+              methods: Object.fromEntries(Object.entries(PredicateFunctions).map(([key, val]) => [key, val.toString()]))
             });
             setTimeout(() => {
               resolve(new Response(JSON.stringify({
