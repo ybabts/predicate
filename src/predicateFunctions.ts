@@ -1,12 +1,6 @@
 
-export default {
-    hello: () => {
-        return 'Hello World!';
-    },
-    name: (name: string) => {
-        return `My name is ${name}`
-    },
-    write: (target: number, value: Record<string, unknown>) => {
+export const client = {
+    write: function write(target: number, value: Record<string, unknown>) {
         self.postMessage({
             action: {
                 name: 'write',
@@ -16,4 +10,14 @@ export default {
         });
         return value;
     }
+}
+
+export const server = {
+    write: function write(msg: MessageEvent, data: Record<string, any>[]) {
+        data[msg.data.action.target] = msg.data.action.value;
+    }
+}
+
+export default {
+    server, client
 }

@@ -1,4 +1,4 @@
-import * as methods from 'http://localhost:8000/api/predicate/functions'
+import methods from 'http://localhost:8000/api/predicate/functions'
 import schema from 'http://localhost:8000/api/predicate/schema';
 
 const METHODS = Object.assign({}, methods);
@@ -12,5 +12,7 @@ async function get(fn: (e: schema[], m: typeof METHODS) => any) {
 }
 
 console.log(await get((e,m) => {
-    
+    return e.map((v,i) => {
+        return v.
+    })
 }))
