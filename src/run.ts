@@ -1,17 +1,16 @@
-import { resolve } from "https://deno.land/std@0.150.0/path/win32.ts";
+import * as methods from 'http://localhost:8000/api/predicate/functions'
+import schema from 'http://localhost:8000/api/predicate/schema';
 
-const worker = new Worker(new URL("./worker.ts", import.meta.url).href, { type: "module" });
+const METHODS = Object.assign({}, methods);
 
-function wait(worker: Worker) {
-    return new Promise((resolve, reject) => {
-        worker.addEventListener('message', msg => {
-            if(msg.data === 'I died') resolve(void null);
-        });
+async function get(fn: (e: schema[], m: typeof METHODS) => any) {
+    const result = await fetch('http://localhost:8000/api/predicate', {
+        method: 'POST',
+        body: fn.toString()
     })
+    return JSON.parse(await (await result.blob()).text());
 }
 
-wait(worker).then(() => {
-    console.log('END')
-})
-
-console.log('Start')
+console.log(await get((e,m) => {
+    
+}))
