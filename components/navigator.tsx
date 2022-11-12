@@ -13,6 +13,7 @@ function Page(props: Page) {
     )
 }
 
+// deno-lint-ignore no-explicit-any
 export default function Navigator(props: any) {
     return (
         <nav class='w-full backdrop-blur p-4 fixed bg-tBlack text-white flex flex-row z-50' style='backdrop-filter: blur(4px);'>
