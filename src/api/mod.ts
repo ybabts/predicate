@@ -17,7 +17,7 @@
 //             })
 //           });
 //           return JSON.parse(await (await result.blob()).text());
-//         }
+//         }()
 //       }
 //     }
 //   }
@@ -28,49 +28,32 @@
 // Imported via URL and is generated based on the database schema
 import ROOT from 'src/api/types.ts';
 
-export namespace Collection {
-  export type identifier = string | number;
+export function collection<I extends keyof P, P extends ROOT>(identifier: I): P[I] {
+  
 }
 
 export class Collection {
-  identifier: Collection.identifier;
-  private static instance_map: Map<Collection.identifier, Collection> = new Map;
-  private variables: Record<string, any> = {};
-  constructor(identifier: Collection.identifier) {
+  identifier: string;
+  data: Record<string,unknown>;
+  constructor(identifier: string, data?: Record<string,unknown>) {
     this.identifier = identifier;
+    this.data = data ? data : {};
   }
-  static get(identifier: Collection.identifier): Collection {
-    if(Collection.instance_map.has(identifier)) return Collection.instance_map.get(identifier)!;
-    return new Collection(identifier);
+  write() {
+
   }
-  pass(variables: Record<string, any>) {
-    this.variables = {
-      ...this.variables,
-      variables
-    }
-    return this;
-  }
-  async filter(predicate: (document: Document) => boolean): Promise<any> {
+}
+
+export class FakeArray<T extends Array<any>> {
+  constructor(arr: T) {
     
   }
-}
+  filter(predicate: (e: string) => boolean) {
 
-export function collection(identifier: Collection.identifier): Collection {
-  return new Collection(identifier);
-}
-
-export namespace Document {
-  export type identifier = string | number;
-}
-
-export class Document {
-  identifier: Document.identifier;
-  private static instance_map: Map<Document.identifier, Document> = new Map;
-  constructor(identifier: Document.identifier) {
-    this.identifier = identifier;
   }
-  static get(identifier: Document.identifier): Document {
-    if(Document.instance_map.has(identifier)) return Document.instance_map.get(identifier)!;
-    return new Document(identifier);
+  pass(variables: Record<string, any>) {
+    return this;
   }
 }
+
+collection('posts').pass({}).filter(e => true)
