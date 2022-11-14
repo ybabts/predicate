@@ -1,39 +1,28 @@
-// export default interface Root {
-//   users: User[];
-//   posts: Post[];
-// }
+// deno-lint-ignore-file no-empty-interface no-namespace
 
-// export interface User {
-//   id: string;
-//   name: string;
-//   age: number;
-//   posts: Post[];
-// }
+import { Node, Node_Collection } from 'src/api/mod.ts';
 
-// export interface Post {
-//   author: User;
-//   title: string;
-//   posted: number;
-//   content: string;
-//   views: number;
-// }
-
-import { Collection, FakeArray } from "src/api/mod.ts";
-
-export default interface ROOT {
-  users: FakeArray<User[]>;
-  posts: FakeArray<Post[]>;
+type node<T> = {
+  [P in keyof T]: Promise<T[P]>
 }
 
-interface User extends Collection {
+type collection<T> = {
+  [P in keyof T]: Array<T[P]>
+}
+
+export type structs = {
+  user: user;
+  post: post;
+}
+
+interface user {
   name: string;
   age: number;
+  posts: post[];
+}
+interface post {
+  title: string;
+  author: user;
+  content: string;
 }
 
-interface Post extends Collection {
-  author: User;
-  title: string;
-  posted: number;
-  content: string;
-  views: number;
-}
