@@ -1,6 +1,12 @@
 
 import * as t from 't/mod.ts';
+import * as Uint8ArraytoInt32 from 't/algorithms/Uint8ArraytoInt32.ts';
 
-const test = t.Int32.toUint8Array(2147483647);
+const test = new Uint8Array([255,255,255,255])
+const en = 0;
 
-console.log(test)
+const attempt = Uint8ArraytoInt32.bitshifting(test, en);
+const actual = t.Int32.fromUint8Array(test, en);
+
+console.log('ACTUAL ',actual);
+console.log('ATTEMPT',attempt)
