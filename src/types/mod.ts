@@ -9,5 +9,6 @@ export const dataViews = {
     Uint32Array: new DataView(typedArrays.Uint32Array.buffer)
 }
 
-
 export * as Uint32 from 't/uint32.ts';
+export * as Uint64 from 't/uint64.ts';
+export * as Int32 from 't/int32.ts';

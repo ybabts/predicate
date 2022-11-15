@@ -1,5 +1,5 @@
 import * as e from 't/endianness.ts';
-import * as i from 't/dataviews.ts';
+import * as d from 't/dataviews.ts';
 
 export function bitshifting(a: Uint8Array, endian: e.endian = e.native): bigint {
     if(endian) return (BigInt(a[a.length - 8]) << 0n) |
@@ -21,8 +21,8 @@ export function bitshifting(a: Uint8Array, endian: e.endian = e.native): bigint 
 }
 
 export function dataview(a: Uint8Array, endian: e.endian = e.native): bigint {
-    i.ta.Uint8.set(a);
-    return i.dv.Uint8.getBigUint64(0, !!endian);
+    d.ta.Uint8.set(a);
+    return d.dv.Uint8.getBigUint64(0, !!endian);
 }
 
 export function newarray(a: Uint8Array, endian: e.endian = e.native): bigint {
